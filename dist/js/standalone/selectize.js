@@ -1305,8 +1305,17 @@
 			self.$dropdown         = $dropdown;
 			self.$dropdown_content = $dropdown_content;
 	
+			var mousedown = false;
+	
 			$dropdown.on('mouseenter', '[data-selectable]', function() { return self.onOptionHover.apply(self, arguments); });
-			$dropdown.on('mousedown click', '[data-selectable]', function() { return self.onOptionSelect.apply(self, arguments); });
+			$dropdown.on('mousedown', '[data-selectable]', function() {
+				self.mousedown = true;
+				return self.onOptionSelect.apply(self, arguments);
+			});
+			$dropdown.on('click', '[data-selectable]', function() {
+				if (self.mousedown) { self.mousedown = false; return;	}
+				return self.onOptionSelect.apply(self, arguments);
+			});
 			watchChildEvent($control, 'mousedown', '*:not(input)', function() { return self.onItemSelect.apply(self, arguments); });
 			autoGrow($control_input);
 	
@@ -1444,6 +1453,7 @@
 				'initialize'      : 'onInitialize',
 				'change'          : 'onChange',
 				'item_add'        : 'onItemAdd',
+				'option_select'   : 'onAddedOptionSelect',
 				'item_remove'     : 'onItemRemove',
 				'clear'           : 'onClear',
 				'option_add'      : 'onOptionAdd',
@@ -2580,6 +2590,7 @@
 	
 				if (self.items.indexOf(value) !== -1) {
 					if (inputMode === 'single') self.close();
+					self.trigger('option_select', value);
 					return;
 				}
 	
@@ -3321,6 +3332,7 @@
 		onInitialize         : null, // function() { ... }
 		onChange             : null, // function(value) { ... }
 		onItemAdd            : null, // function(value, $item) { ... }
+		onAddedOptionSelect  : null, // function(value) { ... }
 		onItemRemove         : null, // function(value) { ... }
 		onClear              : null, // function() { ... }
 		onOptionAdd          : null, // function(value, data) { ... }
