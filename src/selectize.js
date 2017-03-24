@@ -185,8 +185,17 @@ $.extend(Selectize.prototype, {
 		self.$dropdown         = $dropdown;
 		self.$dropdown_content = $dropdown_content;
 
+		var mousedown = false;
+
 		$dropdown.on('mouseenter', '[data-selectable]', function() { return self.onOptionHover.apply(self, arguments); });
-		$dropdown.on('mousedown click', '[data-selectable]', function() { return self.onOptionSelect.apply(self, arguments); });
+		$dropdown.on('mousedown', '[data-selectable]', function() {
+			self.mousedown = true;
+			return self.onOptionSelect.apply(self, arguments);
+		});
+		$dropdown.on('click', '[data-selectable]', function() {
+			if (self.mousedown) { self.mousedown = false; return;	}
+			return self.onOptionSelect.apply(self, arguments);
+		});
 		watchChildEvent($control, 'mousedown', '*:not(input)', function() { return self.onItemSelect.apply(self, arguments); });
 		autoGrow($control_input);
 
