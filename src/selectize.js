@@ -324,6 +324,7 @@ $.extend(Selectize.prototype, {
 			'initialize'      : 'onInitialize',
 			'change'          : 'onChange',
 			'item_add'        : 'onItemAdd',
+			'option_select'   : 'onAddedOptionSelect',
 			'item_remove'     : 'onItemRemove',
 			'clear'           : 'onClear',
 			'option_add'      : 'onOptionAdd',
@@ -1460,6 +1461,7 @@ $.extend(Selectize.prototype, {
 
 			if (self.items.indexOf(value) !== -1) {
 				if (inputMode === 'single') self.close();
+				self.trigger('option_select', value);
 				return;
 			}
 

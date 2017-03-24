@@ -90,17 +90,18 @@
 					};
 				};
 				var $select = $('#select-state').selectize({
-					create          : true,
-					onChange        : eventHandler('onChange'),
-					onItemAdd       : eventHandler('onItemAdd'),
-					onItemRemove    : eventHandler('onItemRemove'),
-					onOptionAdd     : eventHandler('onOptionAdd'),
-					onOptionRemove  : eventHandler('onOptionRemove'),
-					onDropdownOpen  : eventHandler('onDropdownOpen'),
-					onDropdownClose : eventHandler('onDropdownClose'),
-					onFocus         : eventHandler('onFocus'),
-					onBlur          : eventHandler('onBlur'),
-					onInitialize    : eventHandler('onInitialize'),
+					create              : true,
+					onChange            : eventHandler('onChange'),
+					onItemAdd           : eventHandler('onItemAdd'),
+					onAddedOptionSelect : eventHandler('onAddedOptionSelect'),
+					onItemRemove        : eventHandler('onItemRemove'),
+					onOptionAdd         : eventHandler('onOptionAdd'),
+					onOptionRemove      : eventHandler('onOptionRemove'),
+					onDropdownOpen      : eventHandler('onDropdownOpen'),
+					onDropdownClose     : eventHandler('onDropdownClose'),
+					onFocus             : eventHandler('onFocus'),
+					onBlur              : eventHandler('onBlur'),
+					onInitialize        : eventHandler('onInitialize'),
 				});
 				</script>
 			</div>

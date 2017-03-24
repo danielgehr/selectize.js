@@ -54,6 +54,7 @@ Selectize.defaults = {
 	onInitialize         : null, // function() { ... }
 	onChange             : null, // function(value) { ... }
 	onItemAdd            : null, // function(value, $item) { ... }
+	onAddedOptionSelect  : null, // function(value) { ... }
 	onItemRemove         : null, // function(value) { ... }
 	onClear              : null, // function() { ... }
 	onOptionAdd          : null, // function(value, data) { ... }
